@@ -1,0 +1,51 @@
+﻿@model IEnumerable<DemoApp.Data.ViewModels.UserViewModel>
+@{
+    ViewBag.Title = "Users";
+}
+<div class="jumbotron">
+    <h1>Users</h1>
+    <div class="row">
+        <div class="col-lg-4">
+            <p><a href="@Url.Action("AddUser", "Home")" class="btn btn-primary">Add New User &raquo;</a></p>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-lg-12">
+            <div class="form-group">
+                <div class="col-md-offset-2 col-md-10" style="color:green">
+                    @ViewBag.Message
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="row">
+    <div class="col-lg-12">
+        @if (Model != null && Model.Any())
+        {
+            <table class="table table-bordered">
+                <thead>
+                    <tr>
+                        <th>Email</th>
+                        <th>Password</th>
+                        <th></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var item in Model)
+                    {
+                        <tr>
+                            <td>@item.EmailAddress</td>
+                            <td>@item.Password</td>
+                            <td>
+                                <a href="@Url.Action("UpdateUser", "Home", new {  guid=item.GUID})" class="btn btn-primary">Edit &raquo;</a>
+                                <a href="@Url.Action("DeleteUser", "Home", new {  guid=item.GUID})" class="btn btn-danger">Delete &raquo;</a>
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        }
+    </div>
+</div>
+
